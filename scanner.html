@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+    <style>
+		@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;400&family=Be+Vietnam+Pro:wght@400;500;700&family=Jost:wght@200;300;500&family=Montserrat:wght@300;400;500;600&family=Poppins:wght@200;300;400;500&family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+        body {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		  font-family: "Montserrat", sans-serif;
+		}
+		header {
+		  background-color: #6ecab3;
+		  margin-inline: auto;
+		  padding: 5px 20px;
+		  color: #fff;
+		  font-weight: 600;
+		}
+		main {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row-reverse;
+            text-align: center;
+		}
+        /* img {
+		  width: 100%;
+		} */
+		.content {
+		  width: 30%;
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center;
+		  margin: 2rem 3rem;
+		  text-align: left;
+		  color: #505252;
+		}
+		#reader {
+            width: 600px;
+        }
+        #result {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        /* responsive design */
+		@media screen and (max-width: 600px) {
+		  main {
+			flex-direction: column;
+		  }
+		}
+
+	</style>
+
+
+    <title>QR Scanner</title>
+</head>
+<body>
+
+    <!-- header -->
+    <header>
+        <h2>QR Code Scanner</h2>
+      </header>
+  
+    <!-- main -->
+    <main>
+        <div id="reader"></div>
+        <dive id="result"></dive>
+    </main>
+
+    <script>
+
+        const scanner = new Html5QrcodeScanner('reader',{
+            qrbox: {
+                width: 250,
+                height: 250,
+            },
+            fps: 20,
+        });
+
+        scanner.render(success, error);
+
+        function success(result){
+
+            document.getElementById('result').innerHTML = `
+            <h2>Success!</h2>
+            <p><a href="${result}">${result}</a></p>
+            `;
+
+            scanner.clear();
+            document.getElementById('reader').remove();
+        }
+
+        function error(err){
+            console.error(err);
+
+        }
+
+    </script>
+    
+</body>
+</html>
